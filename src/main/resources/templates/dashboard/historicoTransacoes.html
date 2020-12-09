@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html layout:decorator="layout" lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Stonks | Relatório Ativos</title>
+    <link rel="stylesheet" href="/bower_components/jvectormap/jquery-jvectormap.css">
+</head>
+<body>
+
+<div layout:fragment="header">
+    <h1>
+        <i class="fa fa-history"></i> Historico de Transações
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/historicoTransacao/index"><i class="fa fa-history"></i> Historico de transações</a></li>
+    </ol>
+</div>
+
+<div layout:fragment="content">
+    <style>
+        .confirmacao p {
+            color: #616161;
+            font-size: 16px;
+        }
+
+        .confirmacao span {
+            color: black;
+            font-size: 16px;
+        }
+
+        .title-confirmacao {
+            padding-bottom: 20px;
+        }
+
+        p {
+            text-transform: uppercase !important;
+        }
+
+        h5 {
+            text-align: center
+        }
+    </style>
+
+    <div class="alert alert-success" role="alert" th:text="${successMessage}" th:if="${successMessage}"></div>
+    <div class="alert alert-warning" role="alert" th:text="${failMessage}" th:if="${failMessage}"></div>
+
+    <div class="row">
+        <div class="col-xs-12 col-lg-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table id="dataTable" class="table table-striped table-bordered inputToUpper">
+                            <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Operação</th>
+                                <th>Data</th>
+                                <th>Valor</th>
+                                <th>Quantidade</th>
+                                <th>Total</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr th:each="ativoCarteira : ${ativosCarteira}">
+                                <td>
+                                    <span th:text="${ativoCarteira.ativoAbstract.codigo}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${ativoCarteira.operacao}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${#dates.format(ativoCarteira.dataTransacao, 'dd/MM/yyyy')}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${ativoCarteira.valor}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${ativoCarteira.quantidade}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${ativoCarteira.quantidade * ativoCarteira.valor}"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

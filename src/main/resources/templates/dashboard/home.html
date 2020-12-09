@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html layout:decorator="layout" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/bower_components/jvectormap/jquery-jvectormap.css">
+
+    <style>
+        .valor-acao {
+            font-size: 2em;
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+    <div layout:fragment="header">
+        <h1>
+            <i class="fa fa-dashboard"></i> Dashboard
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        </ol>
+    </div>
+
+    <div layout:fragment="content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box box-primary">
+                    <div class="box-header"><p>Total Investido</p></div>
+                    <div class="box-body">
+                        <span style="font-size: 2em;">R$ </span>
+                        <span style="font-size: 2em;" th:text="${total}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4" th:each="carteiraAtivo : ${carteiraAtivos}">
+                <div class="box box-default">
+                    <div class="box-header"><p th:text="${carteiraAtivo.ativoAbstract.codigo}"></p></div>
+                    <div class="box-body">
+
+                        <div class="box-group">
+                            <div class="col-6">
+                                <div class="valor-acao" th:id="'valorAcao_' + ${carteiraAtivo.id}">--</div>
+                            </div>
+                            <div class="col-6">
+                                <div th:id="'lucroAcao_' + ${carteiraAtivo.id}" > -- </div>
+                            </div>
+                        </div>
+
+                        <div th:id="'chart_' + ${carteiraAtivo.id}" class="autoChamadaAjax"
+                             th:attr="data-after-success=${'desenharGraficos(data, 200, &quot;'+carteiraAtivo.id+'&quot;)'}, data-url=${'/ativo/' + carteiraAtivo.id}"><div class="overlay">
+                            <i class="fa fa-refresh fa-spin"></i>
+                        </div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div layout:fragment="scriptContent">
+        <!-- Google Charts -->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+        <script>
+             google.charts.load('current', {'packages':['corechart']});
+             google.charts.setOnLoadCallback(setupAjax);
+
+
+            function setupAjax() {
+                $('.autoChamadaAjax:not(".setupAjax")').each(function autoCahamadaAjaxFunc() {
+                    var this_ = $(this);
+                    atualizarDiv(this_, 500, false);
+                    this_.addClass('setupAjax');
+                })
+            }
+
+            function atualizarDiv(selector, global, time) {
+                const this_ = $(selector);
+                const globalAjax = global ? global : false;
+                const afterSuccess = this_.attr('data-after-success');
+
+                let url = this_.attr('data-url');
+
+
+                if (this_.length) {
+                    $.ajax({
+                        url: url,
+                        global: globalAjax,
+                    }).done(function (data) {
+                        if (afterSuccess) {
+                            eval(afterSuccess);
+                        }
+                    });
+                }
+            }
+
+        </script>
+
+        <script>
+
+            function desenharGraficos (dataGrafico, height, idDiv) {
+                var obj = JSON.parse(dataGrafico);
+
+                var dadosGrafico = obj.dados;
+                var valorAcao = obj.valorAcao;
+                var lucroAcao = obj.lucroAcao;
+
+                document.getElementById('valorAcao_' + idDiv).innerHTML = "R$ " + valorAcao;
+
+                var element =  document.getElementById('lucroAcao_' + idDiv);
+                if (lucroAcao > 0) {
+                   element.classList.add("text-green");
+                } else {
+                    element.classList.add("text-red");
+                }
+
+                element.innerHTML = "" + lucroAcao;
+                var options = {
+                    title: 'TesteGrafico',
+                    titlePosition: 'none',
+                    height: height,
+                    legend: 'none',
+                    hAxis: {
+                        viewWindow: {
+                            min: 0
+                        }
+                    }
+                };
+
+                var data = google.visualization.arrayToDataTable(dadosGrafico);
+
+                var chart =new google.visualization.AreaChart(document.getElementById('chart_' + idDiv));
+                chart.draw(data, options);
+            }
+        </script>
+    </div>
+</body>
+</html>
