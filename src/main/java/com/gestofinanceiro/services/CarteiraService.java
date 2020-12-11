@@ -60,4 +60,9 @@ public class CarteiraService extends DespesaServiceAbstract<Carteira> {
 
         return carteira;
     }
+
+    @Override
+    public void salvarDespesa(Despesa despesa) {
+
+    }
 }
