@@ -1,6 +1,6 @@
 package com.gestofinanceiro.model;
 
-import br.ufrn.imd.stonks.framework.framework.model.UsuarioAbstract;
+import br.ufrn.imd.stonks.framework.framework.model.UsuarioFramework;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="usuario")
-public class Usuario extends UsuarioAbstract {
+public class Usuario extends UsuarioFramework {
 
     @NotNull(message = "CPF é obrigatorio.")
     private String cpf;

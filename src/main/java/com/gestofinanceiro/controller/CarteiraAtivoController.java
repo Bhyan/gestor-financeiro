@@ -1,6 +1,6 @@
 package com.gestofinanceiro.controller;
 
-import br.ufrn.imd.stonks.framework.framework.model.DespesaAtivo;
+import br.ufrn.imd.stonks.framework.framework.model.DespesaAtivoFramework;
 import com.gestofinanceiro.model.Carteira;
 import com.gestofinanceiro.model.Usuario;
 import com.gestofinanceiro.services.CarteiraAtivoService;
@@ -40,7 +40,7 @@ public class CarteiraAtivoController {
 
         Carteira carteira = carteiraService.carteiraByUsuario(usuario);
 
-        List<DespesaAtivo> ativos = carteiraAtivoService.findByAtivosDespesa(carteira.getId(), null);
+        List<DespesaAtivoFramework> ativos = carteiraAtivoService.findByAtivosDespesa(carteira.getId(), null);
 
         model.addAttribute("ativosCarteira", carteiraAtivoService.gerarDadosRelatorio(ativos));
 
@@ -55,7 +55,7 @@ public class CarteiraAtivoController {
         Usuario usuario = usuarioService.usuarioLogado();
         Carteira carteira = carteiraService.carteiraByUsuario(usuario);
 
-        List<DespesaAtivo> ativos = carteiraAtivoService.findByAtivosDespesa(carteira.getId(), null);
+        List<DespesaAtivoFramework> ativos = carteiraAtivoService.findByAtivosDespesa(carteira.getId(), null);
 
         String mensagemEmail = emailService.montarCorpoEmail(ativos);
 

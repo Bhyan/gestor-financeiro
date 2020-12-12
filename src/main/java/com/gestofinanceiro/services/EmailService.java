@@ -1,6 +1,6 @@
 package com.gestofinanceiro.services;
 
-import br.ufrn.imd.stonks.framework.framework.model.DespesaAtivo;
+import br.ufrn.imd.stonks.framework.framework.model.DespesaAtivoFramework;
 import br.ufrn.imd.stonks.framework.framework.service.EmailServiceAbstract;
 import com.gestofinanceiro.helper.EmailConfig;
 import com.gestofinanceiro.model.Usuario;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class EmailService extends EmailServiceAbstract<DespesaAtivo> {
+public class EmailService extends EmailServiceAbstract<DespesaAtivoFramework> {
 
     @Autowired
     private EmailConfig emailConfig;
@@ -29,14 +29,14 @@ public class EmailService extends EmailServiceAbstract<DespesaAtivo> {
     }
 
     @Override
-    public String montarCorpoEmail(List<DespesaAtivo> entities) {
+    public String montarCorpoEmail(List<DespesaAtivoFramework> entities) {
         StringBuilder body = new StringBuilder("<h2>Seu relatório Stonks</h2> <br/>");
 
         body.append("<table><tr><th> Ativo </th><th> Valor </th><th> Quantidade </th><th> Data da Transação </th></tr>");
 
-        for (DespesaAtivo ca : entities) {
+        for (DespesaAtivoFramework ca : entities) {
             body.append("<tr> <th>")
-                    .append(ca.getAtivoAbstract().getCodigo())
+                    .append(ca.getAtivo().getCodigo())
                     .append("</th>").append("<th>")
                     .append(ca.getValor())
                     .append("</th>").append("<th>")
