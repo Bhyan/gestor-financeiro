@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html layout:decorator="layout" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Carteira</title>
+</head>
+<body>
+<div layout:fragment="header">
+    <h1>
+        <i class="fa fa-money"></i> Sua Carteira
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/carteira/index"><i class="fa fa-money"></i> Sua Carteira</a></li>
+    </ol>
+</div>
+
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-xs-12 col-lg-12">
+            <div class="box box-primary">
+                <div class="box-header">Escolha seu tipo de cadastro</div>
+                <form th:action="@{/carteira/cadastrar}" th:object="${selecaoAtivo}" method="post">
+                    <div class="box-body">
+                        <div class="col-sm-12">
+                            <label for="tipoAtivo">Ativo</label>
+                            <select class="form-control input-lg" th:field="*{tipoAtivo}">
+                                <option id="tipoAtivo" th:each="tipoAtivo : ${T(com.gestofinanceiro.model.TipoAtivo).values()}"
+                                        th:value="${tipoAtivo}"
+                                        th:text="${tipoAtivo}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary pull-right">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
