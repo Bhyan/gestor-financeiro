@@ -24,4 +24,8 @@ public class AtivoService {
     public void delete(Ativo ativo) {
         ativoRepository.delete(ativo);
     }
+
+    public List<Ativo> findAll() {
+        return ativoRepository.findAll();
+    }
 }

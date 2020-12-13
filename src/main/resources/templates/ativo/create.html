@@ -23,6 +23,7 @@
         <div class="col-sm-12">
             <div class="box box-primary">
                 <form th:action="@{/ativo/cadastrar}" th:object="${ativo}" method="post">
+                    <input type="hidden" id="usuario" th:field="*{usuario}">
                     <div class="box-body">
                         <div class="col-sm-12 col-md-3">
                             <label for="codigo">Nome</label>
@@ -43,10 +44,8 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            <a class="btn btn-danger pull-right" href="/ativo/index">Cancelar</a>
-                            <button type="submit" style="margin-right: 15px" class="btn btn-primary pull-right">
-                                Cadastrar
-                            </button>
+                            <button type="submit" class="btn btn-primary pull-right">Cadastrar</button>
+                            <a class="btn btn-danger pull-right" style="margin-right: 15px" href="/ativo/index">Cancelar</a>
                         </div>
                     </div>
                 </form>

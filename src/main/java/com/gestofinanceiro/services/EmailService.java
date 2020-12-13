@@ -19,7 +19,7 @@ public class EmailService extends EmailServiceAbstract<DespesaAtivoFramework> {
 
     public Boolean enviarEmail(String mensagemEmail, Usuario usuario) {
         try {
-            super.enviarEmail(mensagemEmail, usuario, "no-reply@stonks.com", "Relatório do Stonks");
+            super.enviarEmail(mensagemEmail, usuario, "no-reply@stonks.com", "Relatório Gestor Financeiro");
             return true;
         } catch (MailException e) {
             System.out.print(e.getMessage());
@@ -30,17 +30,15 @@ public class EmailService extends EmailServiceAbstract<DespesaAtivoFramework> {
 
     @Override
     public String montarCorpoEmail(List<DespesaAtivoFramework> entities) {
-        StringBuilder body = new StringBuilder("<h2>Seu relatório Stonks</h2> <br/>");
+        StringBuilder body = new StringBuilder("<h2>Seu relatório Gestor Financeiro</h2> <br/>");
 
-        body.append("<table><tr><th> Ativo </th><th> Valor </th><th> Quantidade </th><th> Data da Transação </th></tr>");
+        body.append("<table><tr><th> Despesa </th><th> Valor </th><th> Quantidade </th><th> Data da Transação </th></tr>");
 
         for (DespesaAtivoFramework ca : entities) {
             body.append("<tr> <th>")
                     .append(ca.getAtivo().getCodigo())
                     .append("</th>").append("<th>")
                     .append(ca.getValor())
-                    .append("</th>").append("<th>")
-                    .append(ca.getQuantidade())
                     .append("</th>").append("<th>")
                     .append(ca.getDataTransacao())
                     .append("</th> </tr>");

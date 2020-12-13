@@ -1,23 +1,18 @@
 package com.gestofinanceiro.controller;
 
 import com.gestofinanceiro.model.Ativo;
-import com.gestofinanceiro.model.Carteira;
-import com.gestofinanceiro.model.CarteiraAtivo;
 import com.gestofinanceiro.model.Usuario;
 import com.gestofinanceiro.services.AtivoService;
-import com.gestofinanceiro.services.CarteiraAtivoService;
-import com.gestofinanceiro.services.CarteiraService;
 import com.gestofinanceiro.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.Date;
 
 @Controller
 public class AtivoController {
@@ -27,12 +22,6 @@ public class AtivoController {
 
     @Autowired
     private UsuarioService usuarioService;
-
-    @Autowired
-    private CarteiraService carteiraService;
-
-    @Autowired
-    private CarteiraAtivoService carteiraAtivoService;
 
     @GetMapping("/ativo/index")
     public ModelAndView index() {
@@ -52,7 +41,9 @@ public class AtivoController {
         Usuario usuarioLogado = usuarioService.usuarioLogado();
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("ativo", new Ativo());
+        Ativo ativo = new Ativo();
+        ativo.setUsuario(usuarioLogado);
+        modelAndView.addObject("ativo", ativo);
         modelAndView.addObject("usuario", usuarioLogado);
         modelAndView.setViewName("/ativo/create");
 
@@ -61,9 +52,6 @@ public class AtivoController {
 
     @RequestMapping(value = "/ativo/cadastrar", method = RequestMethod.POST)
     public String create(@Valid Ativo ativo) {
-
-        Usuario usuarioLogado = usuarioService.usuarioLogado();
-        ativo.setUsuario(usuarioLogado);
         ativoService.save(ativo);
 
         return "redirect:/ativo/index";
@@ -91,7 +79,6 @@ public class AtivoController {
 
     @RequestMapping(value = "/ativo/remove/{id}")
     public String remove(@PathVariable("id") int id) {
-
         ativoService.delete(ativoService.getById(id).get());
 
         return "redirect:/ativo/index";

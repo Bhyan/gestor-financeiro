@@ -25,11 +25,9 @@
                             <table id="dataTable" class="table table-striped table-bordered inputToUpper">
                                 <thead>
                                 <tr>
-                                    <th>Código</th>
-                                    <th>Operação</th>
+                                    <th>Tipo</th>
                                     <th>Data Transação</th>
                                     <th>Valor</th>
-                                    <th>Quantidade</th>
                                     <th style="text-align: center;">#</th>
                                 </tr>
                                 </thead>
@@ -37,10 +35,7 @@
                                 <tbody>
                                 <tr th:each="ativoCarteira : ${ativosCarteira}">
                                     <td>
-                                        <span th:text="${ativoCarteira.ativoAbstract.codigo}"></span>
-                                    </td>
-                                    <td>
-                                        <span th:text="${ativoCarteira.operacao}"></span>
+                                        <span th:text="${ativoCarteira.ativo.codigo}"></span>
                                     </td>
                                     <td>
                                         <span th:text="${#dates.format(ativoCarteira.dataTransacao, 'dd/MM/yyyy')}"></span>
@@ -48,11 +43,9 @@
                                     <td>
                                         <span th:text="${ativoCarteira.valor}"></span>
                                     </td>
-                                    <td>
-                                        <span th:text="${ativoCarteira.quantidade}"></span>
-                                    </td>
                                     <td style="text-align: center;">
                                         <a class="btn btn-primary" th:href="@{/carteira/editar/{id}(id=${ativoCarteira.id})}"><i class="fa fa-edit"></i> Editar</a>
+                                        <a class="btn btn-danger" th:href="@{/carteira/remove/{id}(id=${ativoCarteira.id})}"><i class="fa fa-edit"></i> Remove</a>
                                     </td>
                                 </tr>
                                 </tbody>
