@@ -55,10 +55,7 @@ public class CarteiraService extends DespesaServiceAbstract {
     @Override
     public DespesaFramework despesaByUsuario() {
         Usuario usuarioLogado = usuarioService.usuarioLogado();
-        Carteira carteira = null;
-        carteira = carteiraByUsuario(usuarioLogado);
-
-        return carteira;
+        return carteiraByUsuario(usuarioLogado);
     }
 
     @Override

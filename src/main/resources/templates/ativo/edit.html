@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html layout:decorator="layout" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Editar Carteira</title>
+    <link rel="stylesheet" href="/bower_components/jvectormap/jquery-jvectormap.css">
+</head>
+
+<body>
+<div layout:fragment="header">
+    <h1>
+        <i class="fa fa-edit"></i> Editar Carteira de Investimento
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/carteira/cadastrar"><i class="fa fa-money"></i> Sua Carteira</a></li>
+    </ol>
+</div>
+
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box box-primary">
+                <form th:action="@{/ativo/editar/{id}(id = ${ativo.id})}" th:object="${ativo}" method="post">
+                    <input type="hidden" id="usuario" th:field="*{usuario}">
+                    <div class="box-body">
+                        <div class="col-sm-12 col-md-3">
+                            <label for="codigo">Nome</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control input-lg" id="codigo" th:field="*{codigo}">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-2">
+                            <label for="operacoes">Operação</label>
+                            <div class="input-group">
+                                <select class="form-control input-lg" th:field="*{operacao}">
+                                    <option id="operacoes"
+                                            th:each="operacao : ${T(com.gestofinanceiro.model.Operacao).values()}"
+                                            th:value="${operacao}"
+                                            th:text="${operacao}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <a class="btn btn-danger pull-right" href="/ativo/index">Cancelar</a>
+                            <button type="submit" style="margin-right: 15px" class="btn btn-primary pull-right">
+                                Cadastrar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

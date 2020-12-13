@@ -42,7 +42,6 @@ public class UsuarioController {
 
         modelAndView.setViewName("login");
         return modelAndView;
-
     }
 
     @RequestMapping(value = "/usuario/{id}", method = RequestMethod.POST)
