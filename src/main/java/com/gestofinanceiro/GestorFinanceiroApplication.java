@@ -7,6 +7,7 @@ import com.gestofinanceiro.repository.RoleRepository;
 import com.gestofinanceiro.repository.UsuarioRepository;
 import com.gestofinanceiro.services.CarteiraService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -25,7 +26,7 @@ import java.util.HashSet;
 @EnableJpaRepositories({"br.ufrn.imd.stonks.framework.framework.repository","com.gestofinanceiro.repository"})
 @ComponentScan({"com.gestofinanceiro", "br.ufrn.imd.stonks.framework.framework"})
 @SpringBootApplication
-public class GestorFinanceiroApplication {
+public class GestorFinanceiroApplication implements CommandLineRunner {
 
 	@Autowired
 	RoleRepository roleRepository;
@@ -39,7 +40,7 @@ public class GestorFinanceiroApplication {
 	@Autowired
 	CarteiraService carteiraService;
 
-	public static String EMAIL_ADMIN = "admin@stonks.com";
+	public static String EMAIL_ADMIN = "admin@gestorfinanceiro.com";
 	public static String SENHA_ADMIN = "123456";
 
 	public static void main(String[] args) {
@@ -81,7 +82,7 @@ public class GestorFinanceiroApplication {
 
 		System.out.println("Login: "+EMAIL_ADMIN+"\nsenha: "+SENHA_ADMIN);
 
-		System.out.println(".\n.\n.\n.\nAplicação Stonks iniciada -> http://localhost:8080/login");
+		System.out.println(".\n.\n.\n.\nAplicação Gestao financeira iniciada -> http://localhost:8080/login");
 	}
 
 	@Bean
