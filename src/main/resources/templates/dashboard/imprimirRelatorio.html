@@ -71,10 +71,10 @@
                             <tbody>
                             <tr th:each="ativoCarteira : ${ativosCarteira}">
                                 <td>
-                                    <span th:text="${ativoCarteira.despesaAtivo.ativoAbstract.codigo}"></span>
+                                    <span th:text="${ativoCarteira.despesaAtivo.ativo.codigo}"></span>
                                 </td>
                                 <td>
-                                    <span th:text="${ativoCarteira.despesaAtivo.operacao}"></span>
+                                    --
                                 </td>
                                 <td>
                                     <span th:text="${#dates.format(ativoCarteira.despesaAtivo.dataTransacao, 'dd/MM/yyyy')}"></span>
