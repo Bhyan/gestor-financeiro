@@ -1,8 +1,8 @@
 package com.gestofinanceiro.services;
 
-import br.ufrn.imd.stonks.framework.framework.model.DespesaAtivo;
-import br.ufrn.imd.stonks.framework.framework.model.DespesaAtivoValorAbstract;
-import br.ufrn.imd.stonks.framework.framework.service.DespesaAtivoService;
+import br.ufrn.imd.stonks.framework.framework.model.DespesaAtivoFramework;
+import br.ufrn.imd.stonks.framework.framework.model.DespesaAtivoValorFramework;
+import br.ufrn.imd.stonks.framework.framework.service.DespesaAtivoServiceAbstract;
 import com.gestofinanceiro.model.Ativo;
 import com.gestofinanceiro.model.Carteira;
 import com.gestofinanceiro.model.CarteiraAtivo;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CarteiraAtivoService extends DespesaAtivoService {
+public class CarteiraAtivoService extends DespesaAtivoServiceAbstract {
 
     @Autowired
     CarteiraAtivoRepository carteiraAtivoRepository;
@@ -29,7 +29,7 @@ public class CarteiraAtivoService extends DespesaAtivoService {
 
         Ativo[] ativos = new Ativo[carteiraAtivo.length];
         for (int i = 0; i < carteiraAtivo.length; i ++) {
-            ativos[i] = (Ativo) carteiraAtivo[i].getAtivoAbstract();
+            ativos[i] = (Ativo) carteiraAtivo[i].getAtivo();
         }
         return ativos;
     }
@@ -42,10 +42,10 @@ public class CarteiraAtivoService extends DespesaAtivoService {
         return carteiraAtivoRepository.totalCarteira(idCarteira);
     }
 
-    // TODO
+    //Todo
     @Override
-    public List<DespesaAtivoValorAbstract> gerarDadosRelatorio(List<DespesaAtivo> ativos) {
-        List<DespesaAtivoValorAbstract> carteiraAtivoValorList = new ArrayList<>();
+    public List<DespesaAtivoValorFramework> gerarDadosRelatorio(List<DespesaAtivoFramework> ativos) {
+        List<DespesaAtivoValorFramework> carteiraAtivoValorList = new ArrayList<>();
 
         return carteiraAtivoValorList;
     }

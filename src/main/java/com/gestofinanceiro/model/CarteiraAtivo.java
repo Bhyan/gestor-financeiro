@@ -1,6 +1,7 @@
 package com.gestofinanceiro.model;
 
-import br.ufrn.imd.stonks.framework.framework.model.DespesaAtivo;
+import br.ufrn.imd.stonks.framework.framework.model.DespesaAtivoFramework;
+
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.Entity;
@@ -9,7 +10,7 @@ import javax.persistence.Enumerated;
 import java.util.Date;
 
 @Entity
-public class CarteiraAtivo extends DespesaAtivo {
+public class CarteiraAtivo extends DespesaAtivoFramework {
 
     @Enumerated(EnumType.STRING)
     private Operacao operacao;
