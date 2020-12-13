@@ -1,6 +1,7 @@
 package com.gestofinanceiro.controller;
 
 import br.ufrn.imd.stonks.framework.framework.model.DespesaAtivoFramework;
+import com.gestofinanceiro.model.Ativo;
 import com.gestofinanceiro.model.Carteira;
 import com.gestofinanceiro.model.Usuario;
 import com.gestofinanceiro.services.CarteiraAtivoService;

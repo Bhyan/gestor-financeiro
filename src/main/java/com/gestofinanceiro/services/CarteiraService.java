@@ -44,7 +44,7 @@ public class CarteiraService extends DespesaServiceAbstract {
     @Override
     public DespesaAtivoFramework adicionarAtivo(DespesaFramework despesa, DespesaAtivoFramework despesaAtivo) {
         despesaAtivo.setDespesa(despesa);
-        return null;
+        return despesaAtivo;
     }
 
     @Override
@@ -60,6 +60,7 @@ public class CarteiraService extends DespesaServiceAbstract {
 
     @Override
     public void salvarDespesa(DespesaFramework despesa) {
-
+        Carteira carteira = new Carteira(despesa);
+        carteiraRepository.save(carteira);
     }
 }

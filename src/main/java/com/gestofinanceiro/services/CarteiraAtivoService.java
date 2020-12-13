@@ -6,6 +6,7 @@ import br.ufrn.imd.stonks.framework.framework.service.DespesaAtivoServiceAbstrac
 import com.gestofinanceiro.model.Ativo;
 import com.gestofinanceiro.model.Carteira;
 import com.gestofinanceiro.model.CarteiraAtivo;
+import com.gestofinanceiro.model.CarteiraAtivoValor;
 import com.gestofinanceiro.repository.CarteiraAtivoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,20 @@ public class CarteiraAtivoService extends DespesaAtivoServiceAbstract {
     @Override
     public List<DespesaAtivoValorFramework> gerarDadosRelatorio(List<DespesaAtivoFramework> ativos) {
         List<DespesaAtivoValorFramework> carteiraAtivoValorList = new ArrayList<>();
+
+        for (DespesaAtivoFramework ativo : ativos) {
+            CarteiraAtivoValor carteiraAtivoValor = new CarteiraAtivoValor();
+            carteiraAtivoValor.setDespesaAtivo(ativo);
+
+            try {
+                carteiraAtivoValor.setValor((float) ativo.getValor());
+                carteiraAtivoValor.setLucro((float) ativo.getValor());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            carteiraAtivoValorList.add(carteiraAtivoValor);
+        }
 
         return carteiraAtivoValorList;
     }

@@ -34,18 +34,18 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <!--<div class="row">
             <div class="col-lg-4" th:each="carteiraAtivo : ${carteiraAtivos}">
                 <div class="box box-default">
-                    <div class="box-header"><p th:text="${carteiraAtivo.ativoAbstract.codigo}"></p></div>
+                    <div class="box-header"><p th:text="${carteiraAtivo.ativo.codigo}"></p></div>
                     <div class="box-body">
 
                         <div class="box-group">
                             <div class="col-6">
-                                <div class="valor-acao" th:id="'valorAcao_' + ${carteiraAtivo.id}">--</div>
+                                <div class="valor-acao" th:id="'valorAcao_' + ${carteiraAtivo.id}">&#45;&#45;</div>
                             </div>
                             <div class="col-6">
-                                <div th:id="'lucroAcao_' + ${carteiraAtivo.id}" > -- </div>
+                                <div th:id="'lucroAcao_' + ${carteiraAtivo.id}" > &#45;&#45; </div>
                             </div>
                         </div>
 
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 
     <div layout:fragment="scriptContent">
