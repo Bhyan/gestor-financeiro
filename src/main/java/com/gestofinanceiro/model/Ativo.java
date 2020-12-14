@@ -2,10 +2,7 @@ package com.gestofinanceiro.model;
 
 import br.ufrn.imd.stonks.framework.framework.model.AtivoFramework;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -20,6 +17,9 @@ public class Ativo extends AtivoFramework {
             name = "usuario_id"
     )
     private Usuario usuario;
+
+    @Column(nullable = true)
+    private String empresa;
 
     public Ativo() { }
 
@@ -37,5 +37,13 @@ public class Ativo extends AtivoFramework {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
     }
 }

@@ -8,7 +8,7 @@
     <div layout:fragment="header">
         <h1>
             <i class="fa fa-money"></i> Tipos
-            <a class="btn btn-sm btn-primary" th:href="@{/ativo/cadastrar}"> <i class="fa fa-plus"></i> Adicionar</a>
+            <a class="btn btn-sm btn-primary" th:href="@{/ativo/escolherTipoAtivo}"> <i class="fa fa-plus"></i> Adicionar</a>
         </h1>
         <ol class="breadcrumb">
             <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -26,7 +26,7 @@
                                 <thead>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>Operação</th>
+                                    <th>Tipo</th>
                                     <th style="text-align: center;">#</th>
                                 </tr>
                                 </thead>
@@ -34,10 +34,14 @@
                                 <tbody>
                                 <tr th:each="ativoCarteira : ${ativosCarteira}">
                                     <td>
-                                        <span th:text="${ativoCarteira.codigo}"></span>
+                                        <span th:text="${ativoCarteira.empresa}"></span>
                                     </td>
                                     <td>
-                                        <span th:text="${ativoCarteira.operacao}"></span>
+                                        <span th:if="${ativoCarteira.class.name == 'com.gestofinanceiro.model.Agua'}" th:text="Agua"></span>
+                                        <span th:if="${ativoCarteira.class.name == 'com.gestofinanceiro.model.Outros'}" th:text="Outros"></span>
+                                        <span th:if="${ativoCarteira.class.name == 'com.gestofinanceiro.model.Saude'}" th:text="Saúde"></span>
+                                        <span th:if="${ativoCarteira.class.name == 'com.gestofinanceiro.model.Energia'}" th:text="Energia"></span>
+                                        <span th:if="${ativoCarteira.class.name == 'com.gestofinanceiro.model.Supermercado'}" th:text="Supermercado"></span>
                                     </td>
                                     <td style="text-align: center;">
                                         <a class="btn btn-primary" th:href="@{/ativo/editar/{id}(id=${ativoCarteira.id})}"><i class="fa fa-edit"></i> Editar</a>

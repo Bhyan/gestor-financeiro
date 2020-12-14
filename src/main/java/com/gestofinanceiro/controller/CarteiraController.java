@@ -50,7 +50,7 @@ public class CarteiraController {
         return modelAndView;
     }
 
-    /*@RequestMapping(value = "/carteira/cadastrar", method = RequestMethod.POST)
+    @RequestMapping(value = "/carteira/cadastrar", method = RequestMethod.POST)
     public ModelAndView create(@Valid CarteiraAtivo carteiraAtivo,
                                BindingResult bindingResult,
                                @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataTransacao,
@@ -78,7 +78,7 @@ public class CarteiraController {
         modelAndView.setViewName("/carteira/index");
 
         return modelAndView;
-    }*/
+    }
 
     @RequestMapping(value = "/carteira/editar/{id}")
     public ModelAndView edit(@PathVariable("id") int id) {
@@ -94,7 +94,7 @@ public class CarteiraController {
         return modelAndView;
     }
 
-   /* @RequestMapping(value = "/carteira/cadastrar", method = RequestMethod.GET)
+    @RequestMapping(value = "/carteira/cadastrar", method = RequestMethod.GET)
     public ModelAndView cadastrarCarteira() {
         Usuario usuarioLogado = usuarioService.usuarioLogado();
 
@@ -105,7 +105,7 @@ public class CarteiraController {
         modelAndView.setViewName("/carteira/create");
 
         return modelAndView;
-    }*/
+    }
 
     @RequestMapping(value = "/carteira/editar/{id}", method = RequestMethod.POST)
     public ModelAndView update(@PathVariable("id") int id, HttpServletRequest request,
@@ -146,7 +146,7 @@ public class CarteiraController {
         return "redirect:/dashboard/home";
     }
 
-    @GetMapping(value = "/carteira/cadastrar")
+    /*@GetMapping(value = "/carteira/cadastrar")
     public ModelAndView cadastrar() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/carteira/cadastrar");
@@ -159,9 +159,9 @@ public class CarteiraController {
         modelAndView.addObject("operacoes", null);
 
         return modelAndView;
-    }
+    }*/
 
-    @RequestMapping(value = "/carteira/cadastrar", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/carteira/cadastrar", method = RequestMethod.POST)
     public ModelAndView cadastrar(@Valid TipoAtivo tipoAtivo) {
         ModelAndView modelAndView = new ModelAndView();
         Usuario usuarioLogado = usuarioService.usuarioLogado();
@@ -192,5 +192,5 @@ public class CarteiraController {
                 break;
         }
         return modelAndView;
-    }
+    }*/
 }
