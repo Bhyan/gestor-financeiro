@@ -12,6 +12,10 @@ public class Carteira extends DespesaFramework {
         super(usuario);
     }
 
+    public Carteira(DespesaFramework despesa) {
+        super(despesa.getUsuario());
+    }
+
     public Carteira() {
     }
 }
