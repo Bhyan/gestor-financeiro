@@ -56,57 +56,34 @@
                         <table id="dataTable" class="table table-striped table-bordered inputToUpper">
                             <thead>
                             <tr>
-                                <th>Código</th>
+                                <th>Empresa</th>
+                                <td>Tipo</td>
                                 <th>Operação</th>
                                 <th>Data</th>
                                 <th>Valor</th>
-                                <th>Valor Hoje</th>
-                                <th>Lucro/Perda</th>
-                                <th>Quantidade</th>
-                                <th>Total Investido</th>
-                                <th>Total de Lucro</th>
                             </tr>
                             </thead>
 
                             <tbody>
                             <tr th:each="ativoCarteira : ${ativosCarteira}">
                                 <td>
-                                    <span th:text="${ativoCarteira.despesaAtivo.ativo.codigo}"></span>
+                                    <span th:text="${ativoCarteira.despesaAtivo.ativo.empresa}"></span>
                                 </td>
                                 <td>
-                                    --
+                                    <span th:if="${ativoCarteira.despesaAtivo.ativo.class.name == 'com.gestofinanceiro.model.Agua'}" th:text="Agua"></span>
+                                    <span th:if="${ativoCarteira.despesaAtivo.ativo.class.name == 'com.gestofinanceiro.model.Outros'}" th:text="Outros"></span>
+                                    <span th:if="${ativoCarteira.despesaAtivo.ativo.class.name == 'com.gestofinanceiro.model.Saude'}" th:text="Saúde"></span>
+                                    <span th:if="${ativoCarteira.despesaAtivo.ativo.class.name == 'com.gestofinanceiro.model.Energia'}" th:text="Energia"></span>
+                                    <span th:if="${ativoCarteira.despesaAtivo.ativo.class.name == 'com.gestofinanceiro.model.Supermercado'}" th:text="Supermercado"></span>
+                                </td>
+                                <td>
+                                    Compra
                                 </td>
                                 <td>
                                     <span th:text="${#dates.format(ativoCarteira.despesaAtivo.dataTransacao, 'dd/MM/yyyy')}"></span>
                                 </td>
                                 <td>
                                     <span th:text="${#strings.replace(#numbers.formatCurrency(ativoCarteira.despesaAtivo.valor), '.00', '')}"></span>
-                                </td>
-                                <td>
-                                    <span th:text="${#strings.replace(#numbers.formatCurrency(ativoCarteira.valor), '.00', '')}"></span>
-                                </td>
-                                <td>
-                                    <div th:if="${ativoCarteira.lucro > 0}" class="text-green">
-                                        <span th:text="${#strings.replace(#numbers.formatCurrency(ativoCarteira.lucro), '.00', '')}"></span>
-                                    </div>
-                                    <div th:unless="${ativoCarteira.lucro > 0}" class="text-red">
-                                        <span th:text="${#strings.replace(#numbers.formatCurrency(ativoCarteira.lucro), '.00', '')}"></span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span th:text="${ativoCarteira.despesaAtivo.quantidade}"></span>
-                                </td>
-                                <td>
-                                    <span th:text="${#strings.replace(#numbers.formatCurrency(ativoCarteira.despesaAtivo.quantidade * ativoCarteira.despesaAtivo.valor), '.00', '')}"></span>
-                                </td>
-                                <td>
-                                    <div th:if="${(ativoCarteira.despesaAtivo.quantidade * ativoCarteira.valor) - (ativoCarteira.despesaAtivo.quantidade * ativoCarteira.despesaAtivo.valor) > 0}" class="text-green">
-                                        <span th:text="${#strings.replace(#numbers.formatCurrency((ativoCarteira.despesaAtivo.quantidade * ativoCarteira.valor) - (ativoCarteira.despesaAtivo.quantidade * ativoCarteira.despesaAtivo.valor)), '.00', '')}"></span>
-                                    </div>
-                                    <div th:unless="${(ativoCarteira.despesaAtivo.quantidade * ativoCarteira.valor) - (ativoCarteira.despesaAtivo.quantidade * ativoCarteira.despesaAtivo.valor) > 0}" class="text-red">
-                                        <span th:text="${#strings.replace(#numbers.formatCurrency((ativoCarteira.despesaAtivo.quantidade * ativoCarteira.valor) - (ativoCarteira.despesaAtivo.quantidade * ativoCarteira.despesaAtivo.valor)), '.00', '')}"></span>
-                                    </div>
-
                                 </td>
                             </tr>
                             </tbody>

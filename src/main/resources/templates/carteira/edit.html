@@ -29,7 +29,7 @@
                                 <select class="form-control input-lg" th:field="*{ativo}">
                                     <option id="ativo" th:each="ativo : ${ativos}"
                                             th:value="${ativo.id}"
-                                            th:text="${ativo.codigo}">
+                                            th:text="${ativo.empresa}">
                                     </option>
                                 </select>
                             </div>

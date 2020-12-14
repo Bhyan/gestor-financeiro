@@ -1,9 +1,6 @@
 package com.gestofinanceiro.controller;
 
-import com.gestofinanceiro.model.Ativo;
-import com.gestofinanceiro.model.Carteira;
-import com.gestofinanceiro.model.CarteiraAtivo;
-import com.gestofinanceiro.model.Usuario;
+import com.gestofinanceiro.model.*;
 import com.gestofinanceiro.services.AtivoService;
 import com.gestofinanceiro.services.CarteiraAtivoService;
 import com.gestofinanceiro.services.CarteiraService;
@@ -13,10 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -151,4 +145,52 @@ public class CarteiraController {
 
         return "redirect:/dashboard/home";
     }
+
+    /*@GetMapping(value = "/carteira/cadastrar")
+    public ModelAndView cadastrar() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/carteira/cadastrar");
+        Usuario usuarioLogado = usuarioService.usuarioLogado();
+        Carteira carteira = carteiraService.carteiraByUsuario(usuarioLogado);
+
+
+        modelAndView.addObject("usuario", usuarioLogado);
+        modelAndView.addObject("selecaoAtivo", new SelecaoAtivo());
+        modelAndView.addObject("operacoes", null);
+
+        return modelAndView;
+    }*/
+
+    /*@RequestMapping(value = "/carteira/cadastrar", method = RequestMethod.POST)
+    public ModelAndView cadastrar(@Valid TipoAtivo tipoAtivo) {
+        ModelAndView modelAndView = new ModelAndView();
+        Usuario usuarioLogado = usuarioService.usuarioLogado();
+        Carteira carteira = carteiraService.carteiraByUsuario(usuarioLogado);
+
+        modelAndView.addObject("usuario", usuarioLogado);
+
+        switch (tipoAtivo) {
+            case AGUA:
+                modelAndView.setViewName("/carteira/cadastroAgua");
+                modelAndView.addObject("agua", new Agua());
+                break;
+            case SUPERMERCADO:
+                modelAndView.setViewName("/carteira/cadastroSupermercado");
+                modelAndView.addObject("supermercado", new Supermercado());
+                break;
+            case SAUDE:
+                modelAndView.setViewName("/carteira/cadastroSaude");
+                modelAndView.addObject("saude", new Saude());
+                break;
+            case ENERGIA:
+                modelAndView.setViewName("/carteira/cadastroEnergia");
+                modelAndView.addObject("energia", new Energia());
+                break;
+            case OUTROS:
+                modelAndView.setViewName("/carteira/cadastroOutros");
+                modelAndView.addObject("outros", new Outros());
+                break;
+        }
+        return modelAndView;
+    }*/
 }

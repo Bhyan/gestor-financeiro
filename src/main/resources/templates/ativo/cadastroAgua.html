@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html layout:decorator="layout" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Adicionar Agua</title>
+    <link rel="stylesheet" href="/bower_components/jvectormap/jquery-jvectormap.css">
+</head>
+
+<body>
+<div layout:fragment="header">
+    <h1>
+        <i class="fa fa-money"></i> Nova Carteira de Investimento
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/carteira/index"><i class="fa fa-money"></i> Sua Carteira</a></li>
+    </ol>
+</div>
+
+<div layout:fragment="content">
+    <div class="alert alert-success" role="alert" th:text="${successMessage}" th:if="${successMessage}"></div>
+    <div class="alert alert-warning" role="alert" th:text="${failMessage}" th:if="${failMessage}"></div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box box-primary">
+                <form th:action="@{/ativo/cadastrarAgua}" th:object="${agua}" method="post">
+                    <div class="box-body">
+                        <div class="col-sm-12 col-md-4">
+                            <label for="empresa">Empresa de distribuição</label>
+                            <div class="input-group">
+                                <input class="form-control input-lg" type="text" id="empresa" th:field="*{empresa}">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <label for="empresa">Conta</label>
+                            <div class="input-group">
+                                <input class="form-control input-lg" type="number" id="conta" th:field="*{conta}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary pull-right">Cadastrar</button>
+                        <a class="btn btn-danger pull-right" style="margin-right: 15px" href="/ativo/index">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
